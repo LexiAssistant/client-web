@@ -6,27 +6,38 @@ module.exports = {
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
-    static: "./dist",
-    hot: true,
+    static: path.join(__dirname, "dist"),
+    compress: true,
+    port: 8080,
   },
   module: {
     rules: [
       {
-        test: /\.tsx?@/,
-        use: "babel-loader",
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
+        use: "ts-loader",
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
       },
     ],
   },
   resolve: {
-    extension: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js"],
   },
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-  plugin: [
+  plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
     }),
