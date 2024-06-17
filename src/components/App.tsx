@@ -1,12 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "../pages/Login";
+import SignupPage from "../pages/Signup";
+import SearchPage from "../pages/Search";
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-blue-500">
-        문서 자동 처리 시스템
-      </h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/Signup" element={<SignupPage />} />
+        <Route path="/" element={<SearchPage />} />
+      </Routes>
+    </Router>
   );
 };
 
