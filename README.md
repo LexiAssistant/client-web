@@ -4,6 +4,11 @@
 >
 > `npm install`  
 > `npm start`
+>
+> ### 테스트 서버 실행방법
+>
+> `cd test_server`  
+> `node server.js`
 
 ### 자체 프레임워크 구성
 
