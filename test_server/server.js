@@ -31,6 +31,13 @@ let scans = [
     imageId: 2,
     scannerId: "2",
   },
+  {
+    userEmail: "user2@example.com",
+    target: "user2",
+    image: "images/example_jpg.jpg",
+    imageId: 3,
+    scannerId: "2",
+  },
 ];
 let scanners = [
   { id: "1", name: "Scanner 1", status: "active", location: "Room 1" },
