@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SignupModal from "./SignUpModal";
+import SearchInput from "./SearchInput";
+import SearchHistory from "./SearchHistory";
 
 const ScannerSearch: React.FC = () => {
   const [inputData, setInputData] = useState("");
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +23,6 @@ const ScannerSearch: React.FC = () => {
   };
 
   const handleButtonClick = () => {
-    // 중복 제거 및 최신 검색 기록을 맨 앞으로 이동
     const updatedHistorySet = new Set([inputData, ...searchHistory]);
     const updatedHistory = Array.from(updatedHistorySet);
     setSearchHistory(updatedHistory);
@@ -38,7 +41,6 @@ const ScannerSearch: React.FC = () => {
   };
 
   const handleInputBlur = () => {
-    // 작은 지연을 주어 클릭이 발생한 경우 삭제 버튼 클릭을 허용
     setTimeout(() => setIsInputFocused(false), 200);
   };
 
@@ -47,53 +49,40 @@ const ScannerSearch: React.FC = () => {
     navigate(`/scan?query=${history}`);
   };
 
+  const openSignupModal = () => {
+    setIsSignupModalOpen(true);
+  };
+
+  const closeSignupModal = () => {
+    setIsSignupModalOpen(false);
+  };
+
   return (
-    <div className="p-4">
-      <div className="flex items-center space-x-4">
-        <input
-          type="text"
-          value={inputData}
-          onChange={handleInputChange}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          placeholder="검색어를 입력하세요"
-        />
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-          onClick={handleButtonClick}
-        >
-          검색하기
-        </button>
-      </div>
+    <div
+      className="p-4 relative bg-gray-50 rounded-2xl h-auto shadow-md"
+      style={{
+        fontFamily:
+          "Apple SD Gothic Neo, '__Roboto_5b92f9', '__Roboto_Fallback_5b92f9', sans-serif, system-ui, sans-serif",
+        boxShadow: "0 2px 2px 0 rgba(0,0,0,0.19)",
+      }}
+    >
+      <SearchInput
+        inputData={inputData}
+        handleInputChange={handleInputChange}
+        handleButtonClick={handleButtonClick}
+        handleInputFocus={handleInputFocus}
+        handleInputBlur={handleInputBlur}
+        openSignupModal={openSignupModal}
+      />
       {isInputFocused && (
-        <div className="relative mt-4">
-          <h2 className="text-lg font-semibold mb-2">검색 기록</h2>
-          <div className="relative">
-            <div className="absolute z-10 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-              <ul className="list-none p-2">
-                {searchHistory.map((history, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between items-center p-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => handleHistoryClick(history)}
-                  >
-                    <span className="text-gray-700">{history}</span>
-                    <button
-                      className="text-red-500 hover:text-red-700 focus:outline-none"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(index);
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <SearchHistory
+          searchHistory={searchHistory}
+          handleHistoryClick={handleHistoryClick}
+          handleDelete={handleDelete}
+        />
+      )}
+      {isSignupModalOpen && (
+        <SignupModal onClose={closeSignupModal} isOpen={isSignupModalOpen} />
       )}
     </div>
   );
