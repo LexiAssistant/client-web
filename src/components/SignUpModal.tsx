@@ -10,7 +10,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
 
   const handleSignup = async () => {
-    const response = await fetch(`https://{hostname}:8080/api/auth/signup`, {
+    const response = await fetch(`https://epson.n-e.kr/api/auth/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
