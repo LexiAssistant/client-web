@@ -7,6 +7,7 @@ interface SearchInputProps {
   handleInputFocus: () => void;
   handleInputBlur: () => void;
   openSignupModal: () => void;
+  openDeviceModal: () => void;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -16,6 +17,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   handleInputFocus,
   handleInputBlur,
   openSignupModal,
+  openDeviceModal,
 }) => {
   return (
     <div className="flex items-center justify-between space-x-4">
@@ -46,6 +48,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
         onClick={openSignupModal}
       >
         회원가입
+      </button>
+      <button
+        className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 h-10"
+        onClick={openDeviceModal}
+      >
+        기기 등록
       </button>
     </div>
   );

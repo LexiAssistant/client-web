@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import DeviceModal from "./DeviceModal";
 import SignupModal from "./SignUpModal";
 import SearchInput from "./SearchInput";
 import SearchHistory from "./SearchHistory";
@@ -9,6 +10,7 @@ const ScannerSearch: React.FC = () => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [isDeviceModalOpen, setIsDeviceModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +59,14 @@ const ScannerSearch: React.FC = () => {
     setIsSignupModalOpen(false);
   };
 
+  const openDeviceModal = () => {
+    setIsDeviceModalOpen(true);
+  };
+
+  const closeDeviceModal = () => {
+    setIsDeviceModalOpen(false);
+  };
+
   return (
     <div
       className="p-4 relative bg-gray-50 rounded-2xl h-auto shadow-md"
@@ -73,6 +83,7 @@ const ScannerSearch: React.FC = () => {
         handleInputFocus={handleInputFocus}
         handleInputBlur={handleInputBlur}
         openSignupModal={openSignupModal}
+        openDeviceModal={openDeviceModal}
       />
       {isInputFocused && (
         <SearchHistory
@@ -83,6 +94,9 @@ const ScannerSearch: React.FC = () => {
       )}
       {isSignupModalOpen && (
         <SignupModal onClose={closeSignupModal} isOpen={isSignupModalOpen} />
+      )}
+      {isDeviceModalOpen && (
+        <DeviceModal onClose={closeDeviceModal} isOpen={isDeviceModalOpen} />
       )}
     </div>
   );
