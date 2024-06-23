@@ -29,32 +29,36 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4">회원가입</h2>
+    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 md:mx-0">
+        <h2 className="text-3xl font-semibold text-gray-900 mb-6">회원가입</h2>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="이메일"
-          className="w-full p-2 border border-gray-300 rounded mb-2"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          style={{ transition: "all 0.2s ease-in-out" }}
         />
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="비밀번호"
-          className="w-full p-2 border border-gray-300 rounded mb-4"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          style={{ transition: "all 0.2s ease-in-out" }}
         />
         <button
           onClick={handleSignup}
-          className="w-full bg-blue-500 text-white py-2 rounded"
+          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          style={{ transition: "background-color 0.2s ease-in-out" }}
         >
           회원가입
         </button>
         <button
           onClick={onClose}
-          className="w-full mt-2 py-2 rounded border border-gray-300"
+          className="w-full mt-4 py-3 rounded-lg border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500"
+          style={{ transition: "background-color 0.2s ease-in-out" }}
         >
           닫기
         </button>

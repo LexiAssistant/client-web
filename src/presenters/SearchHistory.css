@@ -1,0 +1,36 @@
+/* SearchHistory.css */
+.history-container-enter {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.history-container-enter-active {
+  max-height: 500px;
+  opacity: 1;
+  transition: max-height 300ms ease-in, opacity 300ms ease-in;
+}
+
+.history-container-exit {
+  max-height: 500px;
+  opacity: 1;
+  overflow: hidden;
+}
+
+.history-container-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 300ms ease-out, opacity 300ms ease-out;
+}
+
+.history-item-enter {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.history-item-enter-active {
+  max-height: 100px; /* 적절한 최종 높이로 변경 */
+  opacity: 1;
+  transition: max-height 300ms ease-in, opacity 300ms ease-in;
+}

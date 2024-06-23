@@ -69,10 +69,9 @@ const ScannerSearch: React.FC = () => {
 
   return (
     <div
-      className="p-4 relative bg-gray-50 rounded-2xl h-auto shadow-md"
+      className="p-4 sm:p-6 md:p-8 lg:p-10 relative bg-gray-50 rounded-2xl h-auto shadow-md mx-2 sm:mx-4 md:mx-6 lg:mx-8"
       style={{
-        fontFamily:
-          "Apple SD Gothic Neo, '__Roboto_5b92f9', '__Roboto_Fallback_5b92f9', sans-serif, system-ui, sans-serif",
+        fontFamily: "Apple SD Gothic Neo, 'Roboto', sans-serif, system-ui",
         boxShadow: "0 2px 2px 0 rgba(0,0,0,0.19)",
       }}
     >
@@ -85,13 +84,12 @@ const ScannerSearch: React.FC = () => {
         openSignupModal={openSignupModal}
         openDeviceModal={openDeviceModal}
       />
-      {isInputFocused && (
-        <SearchHistory
-          searchHistory={searchHistory}
-          handleHistoryClick={handleHistoryClick}
-          handleDelete={handleDelete}
-        />
-      )}
+      <SearchHistory
+        searchHistory={searchHistory}
+        handleHistoryClick={handleHistoryClick}
+        handleDelete={handleDelete}
+        isInputFocused={isInputFocused}
+      />
       {isSignupModalOpen && (
         <SignupModal onClose={closeSignupModal} isOpen={isSignupModalOpen} />
       )}
